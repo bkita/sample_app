@@ -5,6 +5,9 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   test 'home page layout' do
     get root_path
     assert_template 'static_pages/home'
+    get contact_path
+    assert_select 'title', full_title('Contact')
+
   end
 
   test 'home page root link' do
