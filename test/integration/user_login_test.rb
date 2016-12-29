@@ -31,9 +31,23 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     assert_not is_logged_in?
     assert redirect_to: root_url
+
+    # Simulate user logs out on the 2nd tab
+    delete logout_path
+
     follow_redirect!
     assert_select 'a[href=?]', login_path
     assert_select 'a[href=?]', logout_path, count: 0
     assert_select 'a[href=?]', user_path(@user), count: 0
+  end
+
+  test 'login with selected remember me' do
+    log_in_as(@user, remember_me: '1')
+    assert_not_nil cookies['remember_token'].nil?
+  end
+
+  test 'login without selected remember me' do
+    log_in_as(@user, remember_me: '0')
+    assert cookies['remember_token'].nil?
   end
 end
