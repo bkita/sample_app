@@ -37,4 +37,8 @@ module SessionsHelper
     session.delete(:user_id)
     @user = nil
   end
+
+  def current_user?(user)
+    user == current_user
+  end
 end
