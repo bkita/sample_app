@@ -18,14 +18,13 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit'
   end
 
-  test 'valid user details' do
-    log_in_as(@user)
+  test 'valid user details with friendly forwarding' do
     get edit_user_path(@user)
-    assert_template 'users/edit'
+    log_in_as(@user)
+    assert_redirected_to edit_user_path(@user)
 
     name = 'Jo Black'
     email = 'jb@jbtest.com'
-
     patch user_path(@user), params: { user: { name: name,
                                               email: email,
                                               password: '',
