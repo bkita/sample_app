@@ -1,10 +1,11 @@
 User.create!(name: 'Bartosz Kita',
              email: 'bartosz@kita.email',
              password: 'password',
-             password_confirmation: 'password')
+             password_confirmation: 'password',
+             admin: true)
 
 99.times do |num|
-  name = Faker::Name.name
+  name = Faker::Name.namerails
   email = "test-user-#{num}@testemail.com"
   password = "password"
 
