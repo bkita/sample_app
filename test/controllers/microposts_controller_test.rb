@@ -19,4 +19,12 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to login_url
   end
+
+  test 'should not allow to delete someone else post' do
+    log_in_as(users(:bartek))
+    assert_no_difference 'Micropost.count' do
+      delete micropost_path(microposts(:ants))
+    end
+    assert_redirected_to root_url
+  end
 end
