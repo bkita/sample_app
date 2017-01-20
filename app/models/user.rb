@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name: 'Relatnionship',
+           foregin_key: 'follower_id', depend: :destroy
 
   attr_accessor :remember_token, :activation_token, :reset_token
 
