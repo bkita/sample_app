@@ -7,8 +7,6 @@ class RelationshipTest < ActiveSupport::TestCase
                                      followed_id: users(:jo).id)
   end
 
-
-
   test 'follower id must be preset' do
     @relationship.follower_id = nil
     assert_not @relationship.valid?
